@@ -1,0 +1,23 @@
+{
+  "name": "tic-tac-toe-react.js",
+  "version": "1.0.0",
+  "description": "Tic-Tac-Toe classic game created using React.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolashemonic/tic-tac-toe-react.js.git"
+  },
+  "keywords": [
+    "Tic-Tac-Toe",
+    "React.js"
+  ],
+  "author": "Nicolas Hémonic",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolashemonic/tic-tac-toe-react.js/issues"
+  },
+  "homepage": "https://github.com/nicolashemonic/tic-tac-toe-react.js#readme"
+}
