@@ -1,5 +1,6 @@
 import { Action } from "../actions"
 import { Option, Player } from "../models";
+import getWinnerOptionValues from "../helpers/winnerOptions";
 
 const defaultState = {
     difficulty: 3,
@@ -14,40 +15,58 @@ const defaultState = {
         new Option("X3Y2"),
         new Option("X3Y3")
     ],
-    currentPlayer: new Player(1, "X"),
     players: [
         new Player(1, "X"),
         new Player(2, "O")
-    ]
+    ],
+    currentPlayer: null,
+    playerWinner: null
 };
 
 const ticTacToe = (state = defaultState, action: Action) => {
-  switch (action.type) {
-    case "SELECT_OPTION":
-        return {
-            ...state,
-            options: state.options.map((option) => {
-                if (option.value === action.option.value) {
-                    return {
-                        ...option,
-                        symbol: state.currentPlayer.symbol
+    switch (action.type) {
+        case "NEXT_PLAYER":
+            return {
+                ...state,
+                currentPlayer: state.currentPlayer && state.currentPlayer.id < state.players.length
+                    ? state.players[state.currentPlayer.id] // id + 1 - 1
+                    : state.players[0]
+            }
+        case "SELECT_OPTION":
+            return {
+                ...state,
+                options: state.options.map((option) => {
+                    if (option.value === action.option.value) {
+                        return {
+                            ...option,
+                            symbol: state.currentPlayer.symbol
+                        }
                     }
-                }
+                    return {
+                        ...option
+                    }
+                })
+            }
+        case "CHECK_WINNER":
+            let winnerOptionValues = getWinnerOptionValues(state);
+            if (winnerOptionValues.length) {
                 return {
-                    ...option
+                    ...state,
+                    options: state.options.map((option) => {
+                        return {
+                            ...option,
+                            isWinner: winnerOptionValues.filter(v => v === option.value).length === 1
+                        }
+                    }),
+                    playerWinner: state.currentPlayer
                 }
-            })
-        }
-    case "NEXT_PLAYER":
-      return {
-          ...state,
-          currentPlayer: state.currentPlayer.id < state.players.length 
-            ? state.players[state.currentPlayer.id] // id + 1 - 1
-            : state.players[0]
-      }
-    default:
-      return state;
-  }
+            }
+            return {
+                ...state
+            }
+        default:
+            return state;
+    }
 };
 
 export default ticTacToe;

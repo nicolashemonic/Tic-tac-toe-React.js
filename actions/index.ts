@@ -1,8 +1,21 @@
 import { Option, Player } from "../models";
 
 export type Action =
-    ISelectOption
-    | INextPlayer;
+    INextPlayer
+    | ISelectOption
+    | ICheckWinner;
+
+// Next Player
+
+interface INextPlayer {
+    type: "NEXT_PLAYER";
+}
+
+export const nextPlayer = (): INextPlayer => {
+    return {
+        type: "NEXT_PLAYER"
+    }
+};
 
 // Select Option
 
@@ -18,14 +31,14 @@ export const selectOption = (option: Option): ISelectOption => {
     }
 };
 
-// Next Player
+// Check Winner
 
-interface INextPlayer {
-    type: "NEXT_PLAYER";
+interface ICheckWinner {
+    type: "CHECK_WINNER"
 }
 
-export const nextPlayer = (): INextPlayer => {
+export const checkWinner = (): ICheckWinner => {
     return {
-        type: "NEXT_PLAYER"
+        type: "CHECK_WINNER"
     }
-};
+}

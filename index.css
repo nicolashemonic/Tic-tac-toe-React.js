@@ -17,6 +17,11 @@
     position: relative;
 }
 
+.board__option_winner {
+    background: green;
+    color: white;
+}
+
 .board__option__symbol {
     position: absolute;
     left: 0;
