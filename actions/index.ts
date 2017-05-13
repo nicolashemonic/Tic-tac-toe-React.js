@@ -1,18 +1,20 @@
+import { Option, Player } from "../models";
+
 export type Action =
-    ISelectPiece
+    ISelectOption
     | INextPlayer;
 
-// Select Piece
+// Select Option
 
-interface ISelectPiece {
-    type: "SELECT_PIECE",
-    value: string;
+interface ISelectOption {
+    type: "SELECT_OPTION";
+    option: Option;
 }
 
-export const selectPiece = (value: string): ISelectPiece => {
+export const selectOption = (option: Option): ISelectOption => {
     return {
-        type: "SELECT_PIECE",
-        value: value
+        type: "SELECT_OPTION",
+        option: option
     }
 };
 

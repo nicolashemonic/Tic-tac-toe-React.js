@@ -1,7 +1,8 @@
 import * as React from "react";
 import { connect } from "react-redux";
-import Piece from "./piece";
-import { nextPlayer, selectPiece } from "../actions";
+import Option from "./option";
+import { nextPlayer, selectOption } from "../actions";
+import { Option as OptionModel } from "../models";
 
 const mapStateToProps = (state) => {
   return {
@@ -11,35 +12,19 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    play: (value: string) => {
-      dispatch(selectPiece(value));
+    play: (option: OptionModel) => {
+      dispatch(selectOption(option));
       dispatch(nextPlayer());
     }
   };
 };
 
 class Board extends React.Component<any, any> {
-  renderPieces() {
-    var pieces = [];
-
-    this.props.state.ticTacToe.values.forEach((v, k) => {
-      var symbol = "";
-
-      this.props.state.ticTacToe.players.forEach((p, k) => {
-        if (p.selectedValues.find(sV => sV === v)) {
-          symbol = p.symbol;
-        }
-      });
-
-      pieces.push(<Piece play={() => this.props.play(v)} symbol={symbol} key={k} />);
-    });
-    return pieces;
-  }
-
   render() {
     return (
       <div className="board">
-        {this.renderPieces()}
+        {this.props.state.ticTacToe.options
+          .map((o, k) => <Option play={() => this.props.play(o)} symbol={o.symbol} key={k} />)}
       </div>
     );
   }
