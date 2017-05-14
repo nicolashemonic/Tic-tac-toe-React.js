@@ -1,24 +1,11 @@
 import { Action } from "../actions"
-import { Option, Player } from "../models";
-import getWinnerOptionValues from "../helpers/winnerOptions";
+import { Option, Player, Difficulty } from "../models";
+import { getOptions, getPlayers, getWinnerOptionValues } from "../helpers";
 
 const defaultState = {
-    difficulty: 3,
-    options: [
-        new Option("X1Y1"),
-        new Option("X1Y2"),
-        new Option("X1Y3"),
-        new Option("X2Y1"),
-        new Option("X2Y2"),
-        new Option("X2Y3"),
-        new Option("X3Y1"),
-        new Option("X3Y2"),
-        new Option("X3Y3")
-    ],
-    players: [
-        new Player(1, "X"),
-        new Player(2, "O")
-    ],
+    difficulty: Difficulty.Easy,
+    options: getOptions(Difficulty.Easy),
+    players: getPlayers(),
     currentPlayer: null,
     playerWinner: null
 };
@@ -39,7 +26,9 @@ const ticTacToe = (state = defaultState, action: Action) => {
                     if (option.value === action.option.value) {
                         return {
                             ...option,
-                            symbol: state.currentPlayer.symbol
+                            owner: {
+                                ...state.currentPlayer
+                            }
                         }
                     }
                     return {
@@ -63,6 +52,21 @@ const ticTacToe = (state = defaultState, action: Action) => {
             }
             return {
                 ...state
+            }
+        case "RESET_GAME":
+            return {
+                ...state,
+                difficulty: Difficulty.Easy,
+                options: getOptions(Difficulty.Easy),
+                players: getPlayers(),
+                currentPlayer: null,
+                playerWinner: null
+            }
+        case "SET_DIFFICULTY":
+            return {
+                ...state,
+                difficulty: action.difficulty,
+                options: getOptions(action.difficulty)
             }
         default:
             return state;

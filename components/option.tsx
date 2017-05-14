@@ -6,14 +6,15 @@ export default class Option extends React.Component<any, any> {
         if (this.props.isWinner) {
             classNames.push("board__option_winner");
         }
+        if (this.props.owner) {
+            classNames.push(`board__option_player_${this.props.owner.id}`);
+        }
         return classNames.join(" ");
     }
 
     render() {
         return (
-            <a className={this.boardOptionClassName()} onClick={() => this.props.play()}>
-                <span className="board__option__symbol">{this.props.symbol}</span>
-            </a>
+            <a className={this.boardOptionClassName()} onClick={() => this.props.play()}></a>
         );
     }
 }

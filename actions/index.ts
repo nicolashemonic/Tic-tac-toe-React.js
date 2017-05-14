@@ -1,9 +1,11 @@
-import { Option, Player } from "../models";
+import { Option, Player, Difficulty } from "../models";
 
 export type Action =
     INextPlayer
     | ISelectOption
-    | ICheckWinner;
+    | ICheckWinner
+    | IResetGame
+    | ISetDifficulty;
 
 // Next Player
 
@@ -40,5 +42,31 @@ interface ICheckWinner {
 export const checkWinner = (): ICheckWinner => {
     return {
         type: "CHECK_WINNER"
+    }
+}
+
+// Reset Game
+
+interface IResetGame {
+    type: "RESET_GAME"
+}
+
+export const resetGame = (): IResetGame => {
+    return {
+        type: "RESET_GAME"
+    }
+}
+
+// Set Difficulty
+
+interface ISetDifficulty {
+    type: "SET_DIFFICULTY";
+    difficulty: Difficulty;
+}
+
+export const setDifficulty = (difficulty: Difficulty): ISetDifficulty => {
+    return {
+        type: "SET_DIFFICULTY",
+        difficulty: difficulty
     }
 }

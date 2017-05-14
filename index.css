@@ -8,27 +8,37 @@
     overflow: hidden;
 }
 
-.board__option {
-    float: left;
+.board_difficulty_easy .board__option {
     width: 33.33%;
-    height: 0;
     padding-bottom: 33.33%;
-    border: 1px solid #eee;
-    position: relative;
 }
 
-.board__option_winner {
-    background: green;
+.board_difficulty_medium .board__option {
+    width: 25%;
+    padding-bottom: 25%;
+}
+
+.board_difficulty_hard .board__option {
+    width: 20%;
+    padding-bottom: 20%;
+}
+
+.board__option {
+    float: left;
+    height: 0;
+    border: 1px solid #eee;
+    position: relative;
     color: white;
 }
 
-.board__option__symbol {
-    position: absolute;
-    left: 0;
-    height: 0;
-    display: block;
-    font-size: 100px;
-    width: 100%;
-    height: 100%;
-    text-align: center;
+.board__option_player_1 {
+    background: blue;
+}
+
+.board__option_player_2 {
+    background: red;
+}
+
+.board__option_winner {
+    background: black;
 }

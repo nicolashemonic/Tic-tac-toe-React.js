@@ -1,3 +1,29 @@
+import { Difficulty, Player, Option } from "../models";
+
+// Build options
+
+export function getOptions(difficulty: Difficulty) {
+    var options = [];
+    for (let x = 1; x <= difficulty; x++) {
+        for (let y = 1; y <=difficulty; y++) {
+            options.push(new Option(`X${x}Y${y}`));
+        }
+    }
+    return options;
+}
+
+// Build players
+
+export function getPlayers() {
+    var players = [];
+    for(let id = 1; id <= 2; id++) {
+        players.push(new Player(id));
+    }
+    return players;
+}
+
+// Build winning combination
+
 function winnerOptionValuesLine(options, line, difficulty) {
     var winnerOptionValues = [];
     for (let i = 1; i <= difficulty; i++) {
@@ -39,11 +65,11 @@ function winnerOptionValuesDiagRight(options, difficulty) {
     return winnerOptionValues;
 }
 
-export default function getWinnerOptionValues(state) {
+export function getWinnerOptionValues(state) {
     var winnerOptionValues = [];
 
     state.players.forEach((p) => {
-        let options = state.options.filter(o => o.symbol === p.symbol);
+        let options = state.options.filter(o => o.owner && o.owner.id === p.id);
 
         for (let i = 1; i <= state.difficulty; i++) {
             if (winnerOptionValues.length < state.difficulty) {
