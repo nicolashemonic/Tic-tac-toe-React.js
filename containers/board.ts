@@ -1,7 +1,7 @@
 import { resetGame, setDifficulty } from "../actions";
 import { Difficulty, IState } from "../models";
-import { connect } from "react-redux";
 import { Board, IOwnProps } from "../components/board";
+import { connect } from "react-redux";
 
 export interface IMapStateToProps {
   state: IState

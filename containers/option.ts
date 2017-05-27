@@ -1,7 +1,7 @@
 import { nextPlayer, selectOption, checkWinner } from "../actions";
-import { Option as OptionModel, Difficulty, IState } from "../models";
-import { connect } from "react-redux";
+import { Option as OptionModel, IState } from "../models";
 import { Option, IOwnProps } from "../components/option";
+import { connect } from "react-redux";
 
 export interface IMapStateToProps {
   state: IState

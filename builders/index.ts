@@ -26,8 +26,8 @@ export function buildPlayers() {
 
 export function buildWinnerValues(state: ITicTacToe) {
     var linear: Option[] = [];
-    var diagLeft: Option[] = [];
-    var diagRight: Option[] = [];
+    var diag1: Option[] = [];
+    var diag2: Option[] = [];
     var d = state.difficulty + 1;
 
     state.players.forEach((p) => {
@@ -41,21 +41,11 @@ export function buildWinnerValues(state: ITicTacToe) {
             let x = options.filter(o => o.value.indexOf(`X${dimension}`) > -1);
             linear = x.length == state.difficulty ? x : linear;
 
-            diagLeft = diagLeft.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${dimension}`) > -1));
-            diagRight = diagRight.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${d - dimension}`) > -1));
+            diag1 = diag1.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${dimension}`) > -1));
+            diag2 = diag2.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${d - dimension}`) > -1));
         }
-        diagLeft = diagLeft.length == state.difficulty ? diagLeft : [];
-        diagRight = diagRight.length == state.difficulty ? diagRight : [];
+        diag1 = diag1.length == state.difficulty ? diag1 : [];
+        diag2 = diag2.length == state.difficulty ? diag2 : [];
     });
-
-    if (linear.length === state.difficulty) {
-        return linear.map(o => o.value);
-    }
-    if (diagLeft.length === state.difficulty) {
-        return diagLeft.map(o => o.value);
-    }
-    if (diagRight.length === state.difficulty) {
-        return diagRight.map(o => o.value);
-    }
-    return [];
+    return linear.concat(diag1, diag2).map(o => o.value);
 }

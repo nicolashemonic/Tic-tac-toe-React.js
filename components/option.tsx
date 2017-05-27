@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Player, Option as OptionModel } from "../models";
+import { Option as OptionModel } from "../models";
 import { IMapDispatchToProps, IMapStateToProps } from "../containers/option";
 
 export interface IOwnProps {

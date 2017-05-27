@@ -1,6 +1,6 @@
 import { Action } from "../actions"
 import { ITicTacToe, Option, Player, Difficulty } from "../models";
-import { buildOptions, buildPlayers, buildWinnerValues } from "../helpers";
+import { buildOptions, buildPlayers, buildWinnerValues } from "../builders";
 
 const defaultState: ITicTacToe = {
     difficulty: Difficulty.Easy,

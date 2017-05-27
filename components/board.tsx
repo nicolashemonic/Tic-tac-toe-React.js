@@ -1,6 +1,6 @@
 import * as React from "react";
+import { Difficulty } from "../models";
 import Option from "../containers/option";
-import { Difficulty, Option as OptionModel } from "../models";
 import { IMapStateToProps, IMapDispatchToProps } from "../containers/board";
 
 export interface IOwnProps {}
