@@ -6,7 +6,7 @@ const defaultState: ITicTacToe = {
     difficulty: Difficulty.Easy,
     options: buildOptions(Difficulty.Easy),
     players: buildPlayers(),
-    currentPlayer: null,
+    currentPlayer: buildPlayers()[0],
     playerWinner: null
 };
 
@@ -15,7 +15,7 @@ const ticTacToe = (state = defaultState, action: Action): ITicTacToe => {
         case "NEXT_PLAYER":
             return {
                 ...state,
-                currentPlayer: state.currentPlayer && state.currentPlayer.id < state.players.length
+                currentPlayer: state.currentPlayer.id < state.players.length
                     ? state.players[state.currentPlayer.id] // id + 1 - 1
                     : state.players[0]
             }
@@ -59,7 +59,7 @@ const ticTacToe = (state = defaultState, action: Action): ITicTacToe => {
                 difficulty: Difficulty.Easy,
                 options: buildOptions(Difficulty.Easy),
                 players: buildPlayers(),
-                currentPlayer: null,
+                currentPlayer: buildPlayers()[0],
                 playerWinner: null
             }
         case "SET_DIFFICULTY":

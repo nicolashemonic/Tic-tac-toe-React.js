@@ -20,9 +20,9 @@ export interface IMapDispatchToProps {
 const mapDispatchToProps = (dispatch): IMapDispatchToProps => {
   return {
     play: (option) => {
-      dispatch(nextPlayer());
       dispatch(selectOption(option));
       dispatch(checkWinner());
+      dispatch(nextPlayer());
     }
   };
 };

@@ -3,7 +3,7 @@ import { Difficulty } from "../models";
 import Option from "../containers/option";
 import { IMapStateToProps, IMapDispatchToProps } from "../containers/board";
 
-export interface IOwnProps {}
+export interface IOwnProps { }
 
 interface IProps extends IOwnProps, IMapStateToProps, IMapDispatchToProps { };
 
@@ -55,13 +55,15 @@ export class Board extends React.Component<IProps, IState> {
 
         <p><a onClick={() => this.onResetGame()}>Reset game</a></p>
 
-        <div className={this.boardClassName()}>
-          {this.renderOptions()}
-        </div>
-
+        {!this.props.state.ticTacToe.playerWinner &&
+          <h1>{`Player ${this.props.state.ticTacToe.currentPlayer.id} turn:`}</h1>
+        }
         {this.props.state.ticTacToe.playerWinner &&
           <h1>{`Bravo! Player ${this.props.state.ticTacToe.playerWinner.id} won!`}</h1>
         }
+        <div className={this.boardClassName()}>
+          {this.renderOptions()}
+        </div>
       </div>
     );
   }
