@@ -1,42 +1,19 @@
 import * as React from "react";
-import { connect } from "react-redux";
-import Option from "./option";
-import { nextPlayer, selectOption, checkWinner, resetGame, setDifficulty } from "../actions";
-import { Option as OptionModel, Difficulty } from "../models";
+import Option from "../containers/option";
+import { Difficulty, Option as OptionModel } from "../models";
+import { IMapStateToProps, IMapDispatchToProps } from "../containers/board";
 
-const mapStateToProps = (state) => {
-  return {
-    state: state
-  };
-};
+export interface IOwnProps {}
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    play: (option: OptionModel) => {
-      dispatch(nextPlayer());
-      dispatch(selectOption(option));
-      dispatch(checkWinner());
-    },
-    reset: () => {
-      dispatch(resetGame());
-    },
-    changeDifficulty: (difficulty: Difficulty) => {
-      dispatch(resetGame());
-      dispatch(setDifficulty(difficulty));
-    }
-  };
-};
+interface IProps extends IOwnProps, IMapStateToProps, IMapDispatchToProps { };
 
-class Board extends React.Component<any, any> {
-  play(option) {
-    if (this.props.state.ticTacToe.playerWinner || option.owner) {
-      return;
-    }
-    this.props.play(option);
-  }
+interface IState { };
+
+export class Board extends React.Component<IProps, IState> {
 
   boardClassName() {
     var classNames = ["board"];
+
     switch (this.props.state.ticTacToe.difficulty) {
       case Difficulty.Easy:
         classNames.push("board_difficulty_easy");
@@ -51,12 +28,17 @@ class Board extends React.Component<any, any> {
     return classNames.join(" ");
   }
 
-  onChangeDifficulty(difficulty) {
+  onChangeDifficulty(difficulty: string) {
     this.props.changeDifficulty(parseInt(difficulty))
   }
 
-  onReset() {
-    this.props.reset();
+  onResetGame() {
+    this.props.resetGame();
+  }
+
+  renderOptions() {
+    var options = this.props.state.ticTacToe.options;
+    return options.map((o, k) => <Option option={o} key={k} />)
   }
 
   render() {
@@ -65,17 +47,16 @@ class Board extends React.Component<any, any> {
         <p>
           <label>Difficulty:</label>
           <select onChange={(e) => this.onChangeDifficulty(e.currentTarget.value)}>
-            <option value="3">Easy</option>
-            <option value="4">Medium</option>
-            <option value="5">Hard</option>
+            <option value={Difficulty.Easy}>Easy</option>
+            <option value={Difficulty.Medium}>Medium</option>
+            <option value={Difficulty.Hard}>Hard</option>
           </select>
         </p>
 
-        <p><a onClick={() => this.onReset()}>Reset game</a></p>
+        <p><a onClick={() => this.onResetGame()}>Reset game</a></p>
 
         <div className={this.boardClassName()}>
-          {this.props.state.ticTacToe.options
-            .map((o, k) => <Option play={() => this.play(o)} owner={o.owner} isWinner={o.isWinner} key={k} />)}
+          {this.renderOptions()}
         </div>
 
         {this.props.state.ticTacToe.playerWinner &&
@@ -85,10 +66,3 @@ class Board extends React.Component<any, any> {
     );
   }
 }
-
-const ConnectedBoard = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Board);
-
-export default ConnectedBoard;

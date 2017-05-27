@@ -1,16 +1,16 @@
 import { Action } from "../actions"
-import { Option, Player, Difficulty } from "../models";
-import { getOptions, getPlayers, getWinnerOptionValues } from "../helpers";
+import { ITicTacToe, Option, Player, Difficulty } from "../models";
+import { buildOptions, buildPlayers, buildWinnerValues } from "../helpers";
 
-const defaultState = {
+const defaultState: ITicTacToe = {
     difficulty: Difficulty.Easy,
-    options: getOptions(Difficulty.Easy),
-    players: getPlayers(),
+    options: buildOptions(Difficulty.Easy),
+    players: buildPlayers(),
     currentPlayer: null,
     playerWinner: null
 };
 
-const ticTacToe = (state = defaultState, action: Action) => {
+const ticTacToe = (state = defaultState, action: Action): ITicTacToe => {
     switch (action.type) {
         case "NEXT_PLAYER":
             return {
@@ -37,14 +37,14 @@ const ticTacToe = (state = defaultState, action: Action) => {
                 })
             }
         case "CHECK_WINNER":
-            let winnerOptionValues = getWinnerOptionValues(state);
-            if (winnerOptionValues.length) {
+            let winnerValues = buildWinnerValues(state);
+            if (winnerValues.length) {
                 return {
                     ...state,
                     options: state.options.map((option) => {
                         return {
                             ...option,
-                            isWinner: winnerOptionValues.filter(v => v === option.value).length === 1
+                            isWinner: winnerValues.filter(v => v === option.value).length === 1
                         }
                     }),
                     playerWinner: state.currentPlayer
@@ -57,8 +57,8 @@ const ticTacToe = (state = defaultState, action: Action) => {
             return {
                 ...state,
                 difficulty: Difficulty.Easy,
-                options: getOptions(Difficulty.Easy),
-                players: getPlayers(),
+                options: buildOptions(Difficulty.Easy),
+                players: buildPlayers(),
                 currentPlayer: null,
                 playerWinner: null
             }
@@ -66,7 +66,7 @@ const ticTacToe = (state = defaultState, action: Action) => {
             return {
                 ...state,
                 difficulty: action.difficulty,
-                options: getOptions(action.difficulty)
+                options: buildOptions(action.difficulty)
             }
         default:
             return state;

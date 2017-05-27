@@ -1,8 +1,20 @@
+export interface IState {
+    ticTacToe: ITicTacToe;
+}
+
+export interface ITicTacToe {
+    difficulty: Difficulty;
+    options: Option[];
+    players: Player[];
+    currentPlayer: Player;
+    playerWinner: Player;
+}
+
 export class Option {
     public readonly value: string;
     public readonly owner: Player;
     public readonly isWinner: boolean;
-    
+
     constructor(value: string) {
         this.value = value;
         this.owner = null;
