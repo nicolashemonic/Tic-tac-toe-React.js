@@ -2,10 +2,19 @@
     box-sizing: border-box;
 }
 
+body {
+    background-image: url(img/diablo-3.jpg);
+    background-position: center top;
+    background-size: cover;
+}
+
 .board {
-    width: 400px;
-    border: 1px solid #eee;
+    width: 600px;
+    border: 1px dotted #6c0a0f;
+    background-color: rgba(0, 0, 0, 0.8);
     overflow: hidden;
+    margin: 80px auto 0 auto;
+    box-shadow: 0 0 15px 5px #220727;
 }
 
 .board_difficulty_easy .board__option {
@@ -26,19 +35,43 @@
 .board__option {
     float: left;
     height: 0;
-    border: 1px solid #eee;
+    border: 1px dotted #6c0a0f;
     position: relative;
     color: white;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+@keyframes crest {
+    0% {
+        background-size: 50%;
+    }
+    100% {
+        background-size: 100%;
+    }
 }
 
 .board__option_player_1 {
-    background: blue;
+    background-image: url(img/crest-1.png);
+    animation: crest 500ms forwards;
 }
 
 .board__option_player_2 {
-    background: red;
+    background-image: url(img/crest-3.png);
+    animation: crest 200ms forwards;
+}
+
+@keyframes winner {
+    0% {
+        background-size: 50%;
+        background-color: transparent;
+    }
+    100% {
+        background-size: 100%;
+        background-color: #6c0a0f;
+    }
 }
 
 .board__option_winner {
-    background: black;
+    animation: winner 0.5s forwards;
 }
