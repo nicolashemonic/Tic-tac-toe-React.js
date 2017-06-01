@@ -47,5 +47,7 @@ export function buildWinnerValues(state: ITicTacToe) {
         diag1 = diag1.length == state.difficulty ? diag1 : [];
         diag2 = diag2.length == state.difficulty ? diag2 : [];
     });
-    return linear.concat(diag1, diag2).map(o => o.value);
+
+    var values = linear.concat(diag1, diag2).map(o => o.value);
+    return values.filter((item, pos) => values.indexOf(item) == pos);
 }
