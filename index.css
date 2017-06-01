@@ -10,11 +10,11 @@ body {
 
 .board {
     width: 600px;
-    border: 1px dotted #6c0a0f;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(21, 15, 25, 0.9);
     overflow: hidden;
     margin: 80px auto 0 auto;
-    box-shadow: 0 0 15px 5px #220727;
+    box-shadow: 0 0 0px 20px rgb(21, 15, 25);
+    animation: board-breath 6s infinite ease-in-out;
 }
 
 .board_difficulty_easy .board__option {
@@ -35,7 +35,7 @@ body {
 .board__option {
     float: left;
     height: 0;
-    border: 1px dotted #6c0a0f;
+    border: 1px solid rgba(249, 169, 55, 0.1);
     position: relative;
     color: white;
     background-repeat: no-repeat;
@@ -44,31 +44,45 @@ body {
 
 @keyframes crest {
     0% {
-        background-size: 50%;
+        background-size: 100%;
     }
     100% {
-        background-size: 100%;
+        background-size: 80%;
+    }
+}
+
+@keyframes board-breath {
+    0% {
+        border: 1px solid rgba(249, 169, 55, 1);
+    }
+    50% {
+        border: 1px solid rgba(249, 169, 55, 0.2);
+    }
+    100% {
+        border: 1px solid rgba(249, 169, 55, 1);
     }
 }
 
 .board__option_player_1 {
     background-image: url(img/crest-1.png);
     animation: crest 500ms forwards;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .board__option_player_2 {
     background-image: url(img/crest-3.png);
     animation: crest 200ms forwards;
+    background-color: rgba(0, 0, 0, 0.3);
 }
 
 @keyframes winner {
     0% {
-        background-size: 50%;
+        background-size: 80%;
         background-color: transparent;
     }
     100% {
         background-size: 100%;
-        background-color: #6c0a0f;
+        background-color: rgba(249, 169, 55, 0.5);
     }
 }
 
