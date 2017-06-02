@@ -56,8 +56,8 @@ const ticTacToe = (state = defaultState, action: Action): ITicTacToe => {
         case "RESET_GAME":
             return {
                 ...state,
-                difficulty: Difficulty.Easy,
-                options: buildOptions(Difficulty.Easy),
+                difficulty: state.difficulty,
+                options: buildOptions(state.difficulty),
                 players: buildPlayers(),
                 currentPlayer: buildPlayers()[0],
                 playerWinner: null

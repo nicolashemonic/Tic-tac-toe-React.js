@@ -25,7 +25,8 @@ export function buildPlayers() {
 // Build winner values
 
 export function buildWinnerValues(state: ITicTacToe) {
-    var linear: Option[] = [];
+    var line1: Option[] = [];
+    var line2: Option[] = [];
     var diag1: Option[] = [];
     var diag2: Option[] = [];
     var d = state.difficulty + 1;
@@ -36,10 +37,10 @@ export function buildWinnerValues(state: ITicTacToe) {
         for (let dimension = 1; dimension <= state.difficulty; dimension++) {
 
             let y = options.filter(o => o.value.indexOf(`Y${dimension}`) > -1);
-            linear = y.length == state.difficulty ? y : linear;
+            line1 = y.length == state.difficulty ? y : line1;
 
             let x = options.filter(o => o.value.indexOf(`X${dimension}`) > -1);
-            linear = x.length == state.difficulty ? x : linear;
+            line2 = x.length == state.difficulty ? x : line2;
 
             diag1 = diag1.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${dimension}`) > -1));
             diag2 = diag2.concat(options.filter(o => o.value.indexOf(`X${dimension}Y${d - dimension}`) > -1));
@@ -47,7 +48,7 @@ export function buildWinnerValues(state: ITicTacToe) {
         diag1 = diag1.length == state.difficulty ? diag1 : [];
         diag2 = diag2.length == state.difficulty ? diag2 : [];
     });
-
-    var values = linear.concat(diag1, diag2).map(o => o.value);
+    
+    var values = line1.concat(line2, diag1, diag2).map(o => o.value);
     return values.filter((item, pos) => values.indexOf(item) == pos);
 }
