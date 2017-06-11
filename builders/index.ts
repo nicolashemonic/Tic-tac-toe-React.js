@@ -1,7 +1,5 @@
 import { Difficulty, Player, Option, ITicTacToe } from "../models";
 
-// Build options
-
 export function buildOptions(difficulty: Difficulty) {
     var options: Option[] = [];
     for (let x = 1; x <= difficulty; x++) {
@@ -12,8 +10,6 @@ export function buildOptions(difficulty: Difficulty) {
     return options;
 }
 
-// Build players
-
 export function buildPlayers() {
     var players: Player[] = [];
     for (let id = 1; id <= 2; id++) {
@@ -21,8 +17,6 @@ export function buildPlayers() {
     }
     return players;
 }
-
-// Build winner values
 
 export function buildWinnerValues(state: ITicTacToe) {
     var line1: Option[] = [];

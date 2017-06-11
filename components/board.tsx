@@ -32,12 +32,8 @@ export class Board extends React.Component<IProps, IState> {
     this.props.changeDifficulty(parseInt(difficulty))
   }
 
-  onResetGame() {
-    this.props.resetGame();
-  }
-
   renderOptions() {
-    var options = this.props.state.ticTacToe.options;
+    const options = this.props.state.ticTacToe.options;
     return options.map((o, k) => <Option option={o} key={k} />)
   }
 
@@ -53,7 +49,7 @@ export class Board extends React.Component<IProps, IState> {
           </select>
         </p>
 
-        <p><a onClick={() => this.onResetGame()}>Reset game</a></p>
+        <p><a onClick={() => this.props.resetGame()}>Reset game</a></p>
 
         {!this.props.state.ticTacToe.playerWinner &&
           <h1>{`Player ${this.props.state.ticTacToe.currentPlayer.id} turn:`}</h1>
